@@ -1,0 +1,18 @@
+What is SQS? - Amazon SQS (Simple Queue Service) is a fully managed message queuing service provided by AWS.
+
+Key concepts:
+1. A queue is a temporary storage location where messages are held until they are processed by the consumers. SQS offers two types of queues. Standard Queue and First-In-First-Out queue.
+2. Messages up to 256KB, json, xml format.
+3. Producer - send, consumer - receive and process.
+4. Visibility timeout - the message becomes invisible if the consumer receives the message.
+
+Used:
+1. Microservices - microservices can operate independently.
+2. Ensure communication between components.
+3. In serverless applications.
+4. In event driven systems.
+5. Reduce workload of between services. or example, one system may generate a batch of data that needs processing. SQS can temporarily store the data until a consumer processes it in an asynchronous manner.
+6. Order Processing: In e-commerce platforms or similar applications, SQS is used to manage and queue orders for processing. For example, an order can be queued up, and different services can process payment, inventory, and shipping independently and asynchronously.
+7. Message Buffering: When your system is facing high load, SQS can act as a buffer. For instance, if your application generates a large number of messages, SQS can temporarily store these messages until the system is ready to process them.
+
+Benefits - scalable, reliable, durable, secure, cost-efficient.
