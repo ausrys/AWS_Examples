@@ -1,0 +1,6 @@
+.mypy_cache
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
+terraform.tfstate
+lambda.zip
