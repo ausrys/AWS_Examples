@@ -1,0 +1,9 @@
+variables.tf
+.mypy_cache
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
+terraform.tfstate
+main.zip
+terraform.tfvars
+python.zip
