@@ -9,7 +9,7 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 1. **Creates an IAM Role** for Lambda execution with basic logging permissions.
 2. **Packages and deploys a Lambda function** (`main.zip`) using Python 3.11 runtime.
 3. **Sets environment variables** including `GEMINI_API_KEY`.
-4. **Creates a Lambda Layer** (`layer.zip`) that contains Python dependencies.
+4. **Creates a Lambda Layer** (`python.zip`) that contains Python dependencies.
 5. **Attaches the Lambda Layer** to the function.
 6. **Creates an HTTP API Gateway** endpoint (`POST /ask`) that triggers the Lambda function.
 7. **Grants API Gateway permission** to invoke the Lambda function.
