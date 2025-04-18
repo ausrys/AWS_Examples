@@ -1,9 +1,21 @@
+terraform {
+  required_providers {
+    random = {
+      source = "hashicorp/random"
+    }
+  }
+}
+
 provider "aws" {
   region = "eu-north-1"
 }
 
+resource "random_id" "suffix" {
+  byte_length = 4
+}
+
 resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda_exec_role"
+  name = "lambda_exec_role-${random_id.suffix.hex}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -18,15 +30,16 @@ resource "aws_iam_role" "lambda_exec_role" {
 }
 
 resource "aws_iam_policy_attachment" "lambda_logs" {
-  name       = "attach-lambda-logs"
+  name       = "attach-lambda-logs-${random_id.suffix.hex}"
   roles      = [aws_iam_role.lambda_exec_role.name]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
+
 resource "aws_lambda_layer_version" "python_dependencies" {
-  filename   = "${path.module}/../python.zip"
-  layer_name = "python-dependencies"
+  filename            = "${path.module}/../python.zip"
+  layer_name          = "python-dependencies"
   compatible_runtimes = ["python3.11"]
-  description = "Layer with Python dependencies"
+  description         = "Layer with Python dependencies"
 }
 
 resource "aws_lambda_function" "gemini_function" {
@@ -42,6 +55,7 @@ resource "aws_lambda_function" "gemini_function" {
       GEMINI_API_KEY = var.gemini_api_key
     }
   }
+
   layers = [
     aws_lambda_layer_version.python_dependencies.arn
   ]
@@ -60,10 +74,10 @@ resource "aws_lambda_permission" "allow_apigw" {
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
-  api_id             = aws_apigatewayv2_api.http_api.id
-  integration_type   = "AWS_PROXY"
-  integration_uri    = aws_lambda_function.gemini_function.invoke_arn
-  integration_method = "POST"
+  api_id                 = aws_apigatewayv2_api.http_api.id
+  integration_type       = "AWS_PROXY"
+  integration_uri        = aws_lambda_function.gemini_function.invoke_arn
+  integration_method     = "POST"
   payload_format_version = "2.0"
 }
 

@@ -51,36 +51,6 @@ jobs:
         run: terraform init
         working-directory: Terraform_lambda_gemini/terraform
 
-      - name: Check if IAM role is already imported
-        id: check_role
-        run: |
-          if terraform state list | grep aws_iam_role.lambda_exec_role; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-        working-directory: Terraform_lambda_gemini/terraform
-
-      - name: Import existing IAM role if not yet managed
-        if: steps.check_role.outputs.exists == 'false'
-        run: terraform import aws_iam_role.lambda_exec_role lambda_exec_role
-        working-directory: Terraform_lambda_gemini/terraform
-
-      - name: Check if IAM policy attachment is already imported
-        id: check_attachment
-        run: |
-          if terraform state list | grep aws_iam_policy_attachment.lambda_logs; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
-        working-directory: Terraform_lambda_gemini/terraform
-
-      - name: Import IAM policy attachment if not yet managed
-        if: steps.check_attachment.outputs.exists == 'false'
-        run: terraform import -var="gemini_api_key=dummy" aws_iam_policy_attachment.lambda_logs attach-lambda-logs
-        working-directory: Terraform_lambda_gemini/terraform 
-
       - name: Terraform Plan
         run: terraform plan -var="gemini_api_key=${{ secrets.GEMINI_API_KEY }}" -out=tfplan
         working-directory: Terraform_lambda_gemini/terraform
