@@ -23,14 +23,14 @@ resource "aws_iam_policy_attachment" "lambda_logs" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 resource "aws_lambda_layer_version" "python_dependencies" {
-  filename   = "${path.module}/python.zip"
+  filename   = "${path.module}/../python.zip"
   layer_name = "python-dependencies"
   compatible_runtimes = ["python3.11"]
   description = "Layer with Python dependencies"
 }
 
 resource "aws_lambda_function" "gemini_function" {
-  filename         = "${path.module}/main.zip"
+  filename         = "${path.module}/../main.zip"
   function_name    = "gemini_api_handler"
   role             = aws_iam_role.lambda_exec_role.arn
   handler          = "main.lambda_handler"

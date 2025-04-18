@@ -1,4 +1,3 @@
-variables.tf
 .mypy_cache
 .terraform/
 .terraform.lock.hcl
