@@ -29,8 +29,8 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 
 ## 🚀 Deployment
 
-1. Set secret keys in the github secrets
-2. Push the code
+1. Set secret keys in the github secrets.
+2. Push the code.
 
 
 # 🌐 API Usage
