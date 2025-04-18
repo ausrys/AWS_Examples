@@ -24,18 +24,6 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 - Python 3.x and pip
 
 ---
-
-## 📥 How to Prepare Your Lambda Files
-
-- Zip main python file where the function is
-```
-zip main.zip main.py
-```
-
-- Create Lambda Layer Zip
-```
-pip install requests -t python/
-zip -r python.zip python
 ```
 > [!IMPORTANT]
 > Zip file must be called "python.zip", otherwise the layer will not recognise it.
