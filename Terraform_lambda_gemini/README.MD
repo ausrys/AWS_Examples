@@ -37,7 +37,7 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 - Once deployed, Terraform will output an API endpoint like (you can find the url in the actions):
 
 ```
-https://xyz123.execute-api.eu-north-1.amazonaws.com/ask
+https://xyz1s23.execute-api.eu-north-1.amazonaws.com/ask
 ```
 
 - You can now send a POST request to this endpoint with this format:

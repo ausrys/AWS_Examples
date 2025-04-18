@@ -78,7 +78,7 @@ jobs:
 
       - name: Import IAM policy attachment if not yet managed
         if: steps.check_attachment.outputs.exists == 'false'
-        run: terraform import aws_iam_policy_attachment.lambda_logs attach-lambda-logs
+        run: terraform import -var="gemini_api_key=dummy" aws_iam_policy_attachment.lambda_logs attach-lambda-logs
         working-directory: Terraform_lambda_gemini/terraform 
 
       - name: Terraform Plan
