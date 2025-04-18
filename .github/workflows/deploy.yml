@@ -1,13 +1,19 @@
-name: Deploy to AWS Lambda with Terraform
+name: Deploy Gemini Lambda
 
 on:
   push:
+    branches:
+      - main
     paths:
       - 'Terraform_lambda_gemini/**'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Terraform_lambda_gemini
 
     steps:
       - name: Checkout Code
@@ -32,7 +38,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.7
+          terraform_version: 1.11.4
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -43,12 +49,12 @@ jobs:
 
       - name: Terraform Init
         run: terraform init
-        working-directory: terraform
+        working-directory: Terraform_lambda_gemini/terraform
 
       - name: Terraform Plan
         run: terraform plan -var="gemini_api_key=${{ secrets.GEMINI_API_KEY }}" -out=tfplan
-        working-directory: terraform
+        working-directory: Terraform_lambda_gemini/terraform
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        working-directory: terraform
+        working-directory: Terraform_lambda_gemini/terraform
