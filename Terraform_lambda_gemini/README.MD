@@ -16,14 +16,6 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 8. **Outputs the API URL** after deployment.
 
 ---
-
-## 🔧 Prerequisites
-
-- Terraform installed
-- AWS CLI configured with sufficient permissions
-- Python 3.x and pip
-
----
 ```
 > [!IMPORTANT]
 > Zip file must be called "python.zip", otherwise the layer will not recognise it.
