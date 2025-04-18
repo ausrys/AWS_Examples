@@ -3,7 +3,7 @@ import os
 import requests
 
 
-def lambda_handler(event, context):
+def lambda_handler(event, _):
     try:
         body = json.loads(event['body'])
         user_input = body.get("input")
@@ -16,7 +16,10 @@ def lambda_handler(event, context):
 
         # Prepare Gemini request
         api_key = os.environ["GEMINI_API_KEY"]
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+        url = (
+            "https://generativelanguage.googleapis.com/v1beta/models/"
+            f"gemini-2.0-flash:generateContent?key={api_key}"
+        )
 
         payload = {
             "contents": [
@@ -32,10 +35,11 @@ def lambda_handler(event, context):
             "Content-Type": "application/json"
         }
 
-        gemini_response = requests.post(url, headers=headers, json=payload)
+        gemini_response = requests.post(
+            url, headers=headers, json=payload, timeout=8)
 
         if gemini_response.status_code != 200:
-            raise Exception("Failed to process the request.")
+            raise ValueError("Failed to process the request.")
 
         result = gemini_response.json()
         answer = result['candidates'][0]['content']['parts'][0]['text']
@@ -48,10 +52,10 @@ def lambda_handler(event, context):
             })
         }
 
-    except Exception as e:
+    except RuntimeError:
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "error": "Sorry, something went wrong while processing your request."
+                "error": "Sorry, something went wrong..."
             })
         }
