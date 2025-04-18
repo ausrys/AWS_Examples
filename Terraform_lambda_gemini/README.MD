@@ -5,14 +5,14 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 ---
 
 ## 📦 CI/CD
-1. Watches changes on provided directory
-2. Creates ubuntu machine
-3. Sets up python
-4. Install dependencies from requirmenets.txt into /python folder
-5. Zips main.py and /python folder
-6. Sets up Terraform
-7. Configure AWS credentials
-8. Runs terraform init, plan and apply commands
+1. Watches changes on provided directory.
+2. Creates ubuntu machine.
+3. Sets up python.
+4. Install dependencies from requirmenets.txt into /python folder.
+5. Zips main.py and /python folder.
+6. Sets up Terraform.
+7. Configure AWS credentials.
+8. Runs terraform init, plan and apply commands.
 
 ---
 
