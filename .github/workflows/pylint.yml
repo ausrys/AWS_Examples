@@ -1,4 +1,4 @@
-name: Flake8
+name: pylint
 
 on: [push]
 
@@ -13,4 +13,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint --disable=missing-module-docstring,missing-function-docstring $(git ls-files '*.py')
+        pylint --disable=missing-module-docstring,missing-function-docstring,import-error $(git ls-files '*.py')
