@@ -10,7 +10,7 @@ This Terraform configuration deploys a serverless Python application on AWS usin
 3. Sets up python.
 4. Install dependencies from requirmenets.txt into /python folder.
 5. Zips main.py and /python folder.
-6. Sets up Terraform.
+6. Set up Terraform.
 7. Configure AWS credentials.
 8. Runs terraform init, plan and apply commands.
 
