@@ -3,9 +3,7 @@ name: Deploy to AWS Lambda with Terraform
 on:
   push:
     paths:
-      - 'AWS_EXAMPLES/Terraform_lambda_gemini/**'
-    branches:
-      - main
+      - 'Terraform_lambda_gemini/**'
 
 jobs:
   deploy:
