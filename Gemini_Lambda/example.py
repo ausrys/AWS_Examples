@@ -7,7 +7,10 @@ gemini_api_key = os.getenv("GEMINI_API_KEY")
 if not gemini_api_key:
     raise ValueError("API key not found. Make sure it's set in the .env file.")
 
-url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={gemini_api_key}"
+URL = (
+    "https://generativelanguage.googleapis.com/v1beta/models/"
+    f"gemini-2.0-flash:generateContent?key={gemini_api_key}"
+)
 payload = {
     "contents": [
         {
@@ -20,7 +23,7 @@ payload = {
 headers = {
     "Content-Type": "application/json"
 }
-response = requests.post(url, json=payload, headers=headers, timeout=8)
+response = requests.post(URL, json=payload, headers=headers, timeout=8)
 if response.status_code == 200:
     result = response.json()
     try:
