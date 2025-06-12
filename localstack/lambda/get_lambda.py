@@ -6,7 +6,7 @@ SECRET = "your_jwt_secret"
 VALID_ACTIONS = {"summarize", "translate", "describe"}
 
 sqs = boto3.client(
-    "sqs", endpoint_url="http://localstack:4566", region_name="us-east-1")
+    "sqs", region_name="us-east-1")
 QUEUE_URL = sqs.get_queue_url(QueueName="ai_requests")["QueueUrl"]
 
 

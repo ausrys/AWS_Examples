@@ -1,0 +1,7 @@
+./lambda/hugging_layer
+./lambda/jwt_layer
+./lambda/kafka_layer
+./lambda/process_layer
+event_lambda.zip
+get_lambda.zip
+process_lambda.zip

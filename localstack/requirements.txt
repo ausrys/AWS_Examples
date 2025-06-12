@@ -2,3 +2,4 @@ boto3
 localstack-client
 requests
 PyJWT
+huggingface_hub
